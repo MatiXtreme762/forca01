@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jogo da Forca</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="container">
+
+        <header>
+            <h1>🎯 Jogo da Forca</h1>
+            <p>Escolha um modo e tente descobrir a palavra!</p>
+        </header>
+
+
+        <!-- MENU PRINCIPAL -->
+        <section id="menu" class="card">
+
+            <h2>Escolha o modo</h2>
+
+            <button class="menu-button" onclick="abrirModoAmigo()">
+                👥 Jogar com um amigo
+            </button>
+
+            <button class="menu-button" onclick="iniciarModoAleatorio()">
+                🎲 Palavra aleatória
+            </button>
+
+        </section>
+
+
+        <!-- CONFIGURAÇÃO DO MODO AMIGO -->
+        <section id="configAmigo" class="card hidden">
+
+            <h2>👥 Criar desafio</h2>
+
+            <p>
+                Digite uma palavra e uma dica para seu amigo.
+            </p>
+
+            <label for="palavraAmigo">
+                Palavra:
+            </label>
+
+            <input
+                type="text"
+                id="palavraAmigo"
+                placeholder="Digite a palavra"
+                maxlength="30"
+                autocomplete="off"
+            >
+
+
+            <label for="dicaAmigo">
+                Dica:
+            </label>
+
+            <input
+                type="text"
+                id="dicaAmigo"
+                placeholder="Digite uma dica"
+                maxlength="100"
+                autocomplete="off"
+            >
+
+
+            <div class="botoes">
+
+                <button onclick="criarDesafio()">
+                    🎮 Começar
+                </button>
+
+                <button class="secondary" onclick="voltarMenu()">
+                    ← Voltar
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- JOGO -->
+        <section id="jogo" class="game hidden">
+
+            <div class="game-header">
+
+                <button class="small-button" onclick="voltarMenu()">
+                    ← Menu
+                </button>
+
+                <div class="erros">
+                    Erros:
+                    <span id="erros">0</span>/6
+                </div>
+
+            </div>
+
+
+            <!-- FORCA -->
+            <div class="forca-container">
+
+                <div class="forca">
+
+                    <div class="poste-horizontal"></div>
+
+                    <div class="poste-vertical"></div>
+
+                    <div class="base"></div>
+
+                    <div id="cabeca" class="boneco"></div>
+
+                    <div id="corpo" class="boneco"></div>
+
+                    <div id="bracoEsquerdo" class="boneco"></div>
+
+                    <div id="bracoDireito" class="boneco"></div>
+
+                    <div id="pernaEsquerda" class="boneco"></div>
+
+                    <div id="pernaDireita" class="boneco"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DICA -->
+            <div class="dica-box">
+
+                <strong>💡 Dica:</strong>
+
+                <span id="dica">
+                    -
+                </span>
+
+            </div>
+
+
+            <!-- PALAVRA -->
+            <div id="palavra" class="palavra">
+                _ _ _ _ _
+            </div>
+
+
+            <!-- MENSAGEM -->
+            <div id="mensagem" class="mensagem"></div>
+
+
+            <!-- TECLADO -->
+            <div id="teclado" class="teclado"></div>
+
+
+            <!-- BOTÃO NOVO JOGO -->
+            <button
+                id="novoJogo"
+                class="novo-jogo hidden"
+                onclick="reiniciarJogo()"
+            >
+                🔄 Jogar novamente
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>

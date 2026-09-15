@@ -1,0 +1,593 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at top, #273469, #0d1021 65%);
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 900px;
+
+    text-align: center;
+}
+
+
+header {
+    margin-bottom: 25px;
+}
+
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 8px;
+}
+
+
+header p {
+    color: #b9c0d0;
+}
+
+
+.card {
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 20px;
+
+    padding: 35px;
+
+    backdrop-filter: blur(10px);
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+
+.card h2 {
+    margin-bottom: 20px;
+}
+
+
+.menu-button {
+    width: 100%;
+
+    padding: 18px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #5865f2;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.menu-button:hover {
+    background: #4752c4;
+
+    transform: translateY(-2px);
+}
+
+
+label {
+    display: block;
+
+    text-align: left;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    border: 2px solid transparent;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+
+input:focus {
+    border-color: #5865f2;
+}
+
+
+.botoes {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+button {
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 20px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: #5865f2;
+
+    color: white;
+
+    transition: 0.2s;
+}
+
+
+button:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.1);
+}
+
+
+.secondary {
+    background: #44495c;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================
+   JOGO
+========================= */
+
+.game {
+    background: rgba(255, 255, 255, 0.07);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+
+.game-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.small-button {
+    padding: 9px 15px;
+
+    font-size: 14px;
+
+    background: #44495c;
+}
+
+
+.erros {
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FORCA
+========================= */
+
+.forca-container {
+    display: flex;
+
+    justify-content: center;
+
+    margin: 10px 0 25px;
+}
+
+
+.forca {
+    width: 230px;
+
+    height: 260px;
+
+    position: relative;
+}
+
+
+/* base */
+
+.base {
+    position: absolute;
+
+    width: 140px;
+
+    height: 8px;
+
+    background: white;
+
+    bottom: 10px;
+
+    left: 20px;
+
+    border-radius: 5px;
+}
+
+
+/* poste vertical */
+
+.poste-vertical {
+    position: absolute;
+
+    width: 8px;
+
+    height: 220px;
+
+    background: white;
+
+    bottom: 15px;
+
+    left: 65px;
+
+    border-radius: 5px;
+}
+
+
+/* poste superior */
+
+.poste-horizontal {
+    position: absolute;
+
+    width: 100px;
+
+    height: 8px;
+
+    background: white;
+
+    top: 20px;
+
+    left: 65px;
+
+    border-radius: 5px;
+}
+
+
+/* corda */
+
+.poste-horizontal::after {
+    content: "";
+
+    position: absolute;
+
+    width: 4px;
+
+    height: 30px;
+
+    background: white;
+
+    right: 0;
+
+    top: 8px;
+}
+
+
+/* =========================
+   BONECO
+========================= */
+
+.boneco {
+    display: none;
+
+    position: absolute;
+
+    background: #ffcc80;
+}
+
+
+/* cabeça */
+
+#cabeca {
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    top: 55px;
+
+    right: 34px;
+
+    background: transparent;
+
+    border: 5px solid white;
+}
+
+
+/* corpo */
+
+#corpo {
+    width: 6px;
+
+    height: 70px;
+
+    top: 100px;
+
+    right: 53px;
+
+    background: white;
+}
+
+
+/* braços */
+
+#bracoEsquerdo,
+#bracoDireito {
+    width: 55px;
+
+    height: 6px;
+
+    top: 115px;
+
+    right: 53px;
+
+    background: white;
+
+    transform-origin: left center;
+}
+
+
+#bracoEsquerdo {
+    transform: rotate(145deg);
+}
+
+
+#bracoDireito {
+    transform: rotate(35deg);
+}
+
+
+/* pernas */
+
+#pernaEsquerda,
+#pernaDireita {
+    width: 55px;
+
+    height: 6px;
+
+    top: 168px;
+
+    right: 53px;
+
+    background: white;
+
+    transform-origin: left center;
+}
+
+
+#pernaEsquerda {
+    transform: rotate(125deg);
+}
+
+
+#pernaDireita {
+    transform: rotate(55deg);
+}
+
+
+/* =========================
+   DICA
+========================= */
+
+.dica-box {
+    background: rgba(88, 101, 242, 0.2);
+
+    border: 1px solid rgba(88, 101, 242, 0.4);
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin-bottom: 25px;
+
+    font-size: 17px;
+}
+
+
+#dica {
+    margin-left: 5px;
+}
+
+
+/* =========================
+   PALAVRA
+========================= */
+
+.palavra {
+    font-size: 38px;
+
+    font-weight: bold;
+
+    letter-spacing: 12px;
+
+    margin: 25px 0;
+
+    word-break: break-word;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    min-height: 30px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   TECLADO
+========================= */
+
+.teclado {
+    display: grid;
+
+    grid-template-columns: repeat(9, 1fr);
+
+    gap: 8px;
+
+    max-width: 650px;
+
+    margin: auto;
+}
+
+
+.tecla {
+    padding: 12px 5px;
+
+    background: #34384c;
+
+    border-radius: 8px;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.tecla:hover {
+    background: #5865f2;
+}
+
+
+.tecla:disabled {
+    opacity: 0.35;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   NOVO JOGO
+========================= */
+
+.novo-jogo {
+    margin-top: 25px;
+
+    background: #22c55e;
+}
+
+
+.novo-jogo:hover {
+    background: #16a34a;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    header h1 {
+        font-size: 30px;
+    }
+
+
+    .card,
+    .game {
+        padding: 20px 15px;
+    }
+
+
+    .palavra {
+        font-size: 25px;
+
+        letter-spacing: 7px;
+    }
+
+
+    .teclado {
+        grid-template-columns: repeat(7, 1fr);
+
+        gap: 5px;
+    }
+
+
+    .tecla {
+        padding: 10px 3px;
+
+        font-size: 13px;
+    }
+
+
+    .botoes {
+        flex-direction: column;
+    }
+
+
+    .forca {
+        transform: scale(0.85);
+    }
+}
