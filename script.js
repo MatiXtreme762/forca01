@@ -1,5 +1,6 @@
+
 // ==========================================
-// CONFIGURAÇÕES
+// PALAVRAS DO MODO ALEATÓRIO
 // ==========================================
 
 const palavras = [
@@ -35,7 +36,7 @@ const palavras = [
     },
 
     {
-        palavra: "AVIÃO",
+        palavra: "AVIAO",
         dica: "Meio de transporte que voa."
     },
 
@@ -83,7 +84,7 @@ const palavras = [
 
 
 // ==========================================
-// VARIÁVEIS DO JOGO
+// VARIÁVEIS
 // ==========================================
 
 let palavraAtual = "";
@@ -103,23 +104,38 @@ let modoAtual = "";
 // ELEMENTOS
 // ==========================================
 
-const menu = document.getElementById("menu");
+const menu =
+    document.getElementById("menu");
 
-const configAmigo = document.getElementById("configAmigo");
+const configAmigo =
+    document.getElementById("configAmigo");
 
-const jogo = document.getElementById("jogo");
+const jogo =
+    document.getElementById("jogo");
 
-const palavraElemento = document.getElementById("palavra");
+const palavraElemento =
+    document.getElementById("palavra");
 
-const dicaElemento = document.getElementById("dica");
+const dicaElemento =
+    document.getElementById("dica");
 
-const errosElemento = document.getElementById("erros");
+const errosElemento =
+    document.getElementById("erros");
 
-const tecladoElemento = document.getElementById("teclado");
+const tecladoElemento =
+    document.getElementById("teclado");
 
-const mensagemElemento = document.getElementById("mensagem");
+const mensagemElemento =
+    document.getElementById("mensagem");
 
-const novoJogoElemento = document.getElementById("novoJogo");
+const novoJogoElemento =
+    document.getElementById("novoJogo");
+
+const letrasCertasElemento =
+    document.getElementById("letrasCertas");
+
+const letrasErradasElemento =
+    document.getElementById("letrasErradas");
 
 
 // ==========================================
@@ -183,17 +199,21 @@ function criarDesafio() {
 
 
 // ==========================================
-// INICIAR MODO ALEATÓRIO
+// MODO ALEATÓRIO
 // ==========================================
 
 function iniciarModoAleatorio() {
 
     const indice =
-        Math.floor(Math.random() * palavras.length);
+        Math.floor(
+            Math.random() * palavras.length
+        );
 
 
     palavraAtual =
-        palavras[indice].palavra;
+        normalizarPalavra(
+            palavras[indice].palavra
+        );
 
 
     dicaAtual =
@@ -228,11 +248,17 @@ function iniciarJogo() {
     jogo.classList.remove("hidden");
 
 
-    dicaElemento.textContent = dicaAtual;
+    dicaElemento.textContent =
+        dicaAtual;
 
-    errosElemento.textContent = erros;
 
-    mensagemElemento.textContent = "";
+    errosElemento.textContent =
+        erros;
+
+
+    mensagemElemento.textContent =
+        "";
+
 
     novoJogoElemento.classList.add("hidden");
 
@@ -242,6 +268,8 @@ function iniciarJogo() {
     atualizarPalavra();
 
     atualizarForca();
+
+    atualizarLetrasUsadas();
 
 }
 
@@ -253,16 +281,20 @@ function iniciarJogo() {
 function normalizarPalavra(texto) {
 
     return texto
+
         .normalize("NFD")
+
         .replace(/[\u0300-\u036f]/g, "")
+
         .toUpperCase()
+
         .replace(/[^A-Z0-9 ]/g, "");
 
 }
 
 
 // ==========================================
-// ATUALIZAR PALAVRA
+// MOSTRAR PALAVRA
 // ==========================================
 
 function atualizarPalavra() {
@@ -272,21 +304,20 @@ function atualizarPalavra() {
 
     for (let letra of palavraAtual) {
 
-        // mantém espaços
         if (letra === " ") {
 
-            resultado += "  ";
+            resultado += "   ";
 
         }
 
-        // letra já descoberta
-        else if (letrasCorretas.includes(letra)) {
+        else if (
+            letrasCorretas.includes(letra)
+        ) {
 
             resultado += letra + " ";
 
         }
 
-        // letra escondida
         else {
 
             resultado += "_ ";
@@ -306,7 +337,7 @@ function atualizarPalavra() {
 
 
 // ==========================================
-// CRIAR TECLADO
+// TECLADO
 // ==========================================
 
 function criarTeclado() {
@@ -324,7 +355,9 @@ function criarTeclado() {
             document.createElement("button");
 
 
-        botao.textContent = letra;
+        botao.textContent =
+            letra;
+
 
         botao.classList.add("tecla");
 
@@ -348,8 +381,10 @@ function criarTeclado() {
 
 function tentarLetra(letra, botao = null) {
 
-    if (letrasCorretas.includes(letra) ||
-        letrasErradas.includes(letra)) {
+    if (
+        letrasCorretas.includes(letra) ||
+        letrasErradas.includes(letra)
+    ) {
 
         return;
 
@@ -363,31 +398,72 @@ function tentarLetra(letra, botao = null) {
     }
 
 
-    // letra correta
+    // LETRA CERTA
     if (palavraAtual.includes(letra)) {
 
         letrasCorretas.push(letra);
 
     }
 
-    // letra errada
+
+    // LETRA ERRADA
     else {
 
         letrasErradas.push(letra);
 
         erros++;
 
-        errosElemento.textContent = erros;
+        errosElemento.textContent =
+            erros;
 
         atualizarForca();
 
     }
 
 
+    atualizarLetrasUsadas();
+
     atualizarPalavra();
 
-
     verificarDerrota();
+
+}
+
+
+// ==========================================
+// ATUALIZAR LETRAS USADAS
+// ==========================================
+
+function atualizarLetrasUsadas() {
+
+    if (letrasCorretas.length > 0) {
+
+        letrasCertasElemento.textContent =
+            letrasCorretas.join(" • ");
+
+    }
+
+    else {
+
+        letrasCertasElemento.textContent =
+            "Nenhuma";
+
+    }
+
+
+    if (letrasErradas.length > 0) {
+
+        letrasErradasElemento.textContent =
+            letrasErradas.join(" • ");
+
+    }
+
+    else {
+
+        letrasErradasElemento.textContent =
+            "Nenhuma";
+
+    }
 
 }
 
@@ -396,43 +472,55 @@ function tentarLetra(letra, botao = null) {
 // TECLADO FÍSICO
 // ==========================================
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-    if (jogo.classList.contains("hidden")) {
+        if (
+            jogo.classList.contains("hidden")
+        ) {
 
-        return;
+            return;
+
+        }
+
+
+        const letra =
+            event.key.toUpperCase();
+
+
+        if (
+            /^[A-Z]$/.test(letra)
+        ) {
+
+            const botoes =
+                document.querySelectorAll(".tecla");
+
+
+            botoes.forEach(botao => {
+
+                if (
+                    botao.textContent === letra &&
+                    !botao.disabled
+                ) {
+
+                    tentarLetra(
+                        letra,
+                        botao
+                    );
+
+                }
+
+            });
+
+        }
 
     }
-
-
-    const letra =
-        event.key.toUpperCase();
-
-
-    if (/^[A-Z]$/.test(letra)) {
-
-        const botoes =
-            document.querySelectorAll(".tecla");
-
-
-        botoes.forEach(botao => {
-
-            if (botao.textContent === letra &&
-                !botao.disabled) {
-
-                tentarLetra(letra, botao);
-
-            }
-
-        });
-
-    }
-
-});
+);
 
 
 // ==========================================
-// FORCA
+// ATUALIZAR BONECO
 // ==========================================
 
 function atualizarForca() {
@@ -454,25 +542,29 @@ function atualizarForca() {
     ];
 
 
-    partes.forEach((parte, index) => {
+    partes.forEach(
+        (parte, index) => {
 
-        const elemento =
-            document.getElementById(parte);
+            const elemento =
+                document.getElementById(parte);
 
 
-        if (index < erros) {
+            if (index < erros) {
 
-            elemento.style.display = "block";
+                elemento.style.display =
+                    "block";
+
+            }
+
+            else {
+
+                elemento.style.display =
+                    "none";
+
+            }
 
         }
-
-        else {
-
-            elemento.style.display = "none";
-
-        }
-
-    });
+    );
 
 }
 
@@ -484,21 +576,30 @@ function atualizarForca() {
 function verificarVitoria() {
 
     const letrasDaPalavra =
-        [...new Set(
-            palavraAtual.replace(/ /g, "").split("")
-        )];
+        [
+            ...new Set(
+                palavraAtual
+                    .replace(/ /g, "")
+                    .split("")
+            )
+        ];
 
 
     const ganhou =
         letrasDaPalavra.every(
-            letra => letrasCorretas.includes(letra)
+            letra =>
+                letrasCorretas.includes(letra)
         );
 
 
-    if (ganhou && palavraAtual !== "") {
+    if (
+        ganhou &&
+        palavraAtual !== ""
+    ) {
 
         mensagemElemento.textContent =
             "🎉 PARABÉNS! Você acertou!";
+
 
         mensagemElemento.style.color =
             "#22c55e";
@@ -507,7 +608,9 @@ function verificarVitoria() {
         bloquearTeclado();
 
 
-        novoJogoElemento.classList.remove("hidden");
+        novoJogoElemento.classList.remove(
+            "hidden"
+        );
 
     }
 
@@ -533,7 +636,9 @@ function verificarDerrota() {
         bloquearTeclado();
 
 
-        novoJogoElemento.classList.remove("hidden");
+        novoJogoElemento.classList.remove(
+            "hidden"
+        );
 
     }
 
@@ -603,27 +708,33 @@ function voltarMenu() {
 
 document
     .getElementById("palavraAmigo")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            document
-                .getElementById("dicaAmigo")
-                .focus();
+                document
+                    .getElementById("dicaAmigo")
+                    .focus();
+
+            }
 
         }
-
-    });
+    );
 
 
 document
     .getElementById("dicaAmigo")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            criarDesafio();
+                criarDesafio();
+
+            }
 
         }
-
-    });
+    );

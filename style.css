@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -21,7 +22,6 @@ body {
     padding: 20px;
 }
 
-
 .container {
     width: 100%;
     max-width: 900px;
@@ -29,22 +29,23 @@ body {
     text-align: center;
 }
 
-
 header {
     margin-bottom: 25px;
 }
-
 
 header h1 {
     font-size: 42px;
     margin-bottom: 8px;
 }
 
-
 header p {
     color: #b9c0d0;
 }
 
+
+/* =========================
+   CARDS
+========================= */
 
 .card {
     background: rgba(255, 255, 255, 0.08);
@@ -60,85 +61,14 @@ header p {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
-
 .card h2 {
     margin-bottom: 20px;
 }
 
 
-.menu-button {
-    width: 100%;
-
-    padding: 18px;
-
-    margin-top: 15px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: #5865f2;
-
-    color: white;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-}
-
-
-.menu-button:hover {
-    background: #4752c4;
-
-    transform: translateY(-2px);
-}
-
-
-label {
-    display: block;
-
-    text-align: left;
-
-    margin-top: 18px;
-
-    margin-bottom: 7px;
-
-    font-weight: bold;
-}
-
-
-input {
-    width: 100%;
-
-    padding: 14px;
-
-    border-radius: 10px;
-
-    border: 2px solid transparent;
-
-    outline: none;
-
-    font-size: 16px;
-}
-
-
-input:focus {
-    border-color: #5865f2;
-}
-
-
-.botoes {
-    display: flex;
-
-    gap: 10px;
-
-    margin-top: 25px;
-}
-
+/* =========================
+   BOTÕES
+========================= */
 
 button {
     border: none;
@@ -160,18 +90,73 @@ button {
     transition: 0.2s;
 }
 
-
 button:hover {
     transform: translateY(-2px);
 
     filter: brightness(1.1);
 }
 
+.menu-button {
+    width: 100%;
+
+    padding: 18px;
+
+    margin-top: 15px;
+
+    font-size: 18px;
+}
 
 .secondary {
     background: #44495c;
 }
 
+.botoes {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+label {
+    display: block;
+
+    text-align: left;
+
+    margin-top: 18px;
+
+    margin-bottom: 7px;
+
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    border: 2px solid transparent;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #5865f2;
+}
+
+
+/* =========================
+   ESCONDER
+========================= */
 
 .hidden {
     display: none !important;
@@ -192,7 +177,6 @@ button:hover {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
-
 .game-header {
     display: flex;
 
@@ -200,9 +184,8 @@ button:hover {
 
     align-items: center;
 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
-
 
 .small-button {
     padding: 9px 15px;
@@ -211,7 +194,6 @@ button:hover {
 
     background: #44495c;
 }
-
 
 .erros {
     font-size: 18px;
@@ -229,92 +211,81 @@ button:hover {
 
     justify-content: center;
 
-    margin: 10px 0 25px;
+    margin: 10px 0 20px;
 }
 
-
 .forca {
-    width: 230px;
+    width: 240px;
 
-    height: 260px;
+    height: 270px;
 
     position: relative;
 }
 
 
-/* base */
+/* Base */
 
 .base {
     position: absolute;
 
-    width: 140px;
-
+    width: 150px;
     height: 8px;
 
     background: white;
 
+    left: 35px;
     bottom: 10px;
-
-    left: 20px;
 
     border-radius: 5px;
 }
 
 
-/* poste vertical */
+/* Poste vertical */
 
 .poste-vertical {
     position: absolute;
 
     width: 8px;
-
-    height: 220px;
+    height: 225px;
 
     background: white;
 
+    left: 75px;
     bottom: 15px;
-
-    left: 65px;
 
     border-radius: 5px;
 }
 
 
-/* poste superior */
+/* Poste horizontal */
 
 .poste-horizontal {
     position: absolute;
 
-    width: 100px;
-
+    width: 105px;
     height: 8px;
 
     background: white;
 
+    left: 75px;
     top: 20px;
-
-    left: 65px;
 
     border-radius: 5px;
 }
 
 
-/* corda */
+/* Corda */
 
-.poste-horizontal::after {
-    content: "";
-
+.corda {
     position: absolute;
 
-    width: 4px;
-
-    height: 30px;
+    width: 5px;
+    height: 35px;
 
     background: white;
 
-    right: 0;
-
-    top: 8px;
+    left: 175px;
+    top: 28px;
 }
 
 
@@ -322,101 +293,125 @@ button:hover {
    BONECO
 ========================= */
 
-.boneco {
+/*
+    O centro do boneco fica em X = 175.
+    Todas as partes são posicionadas
+    em relação à mesma coordenada.
+*/
+
+
+/* CABEÇA */
+
+.parte-cabeca {
     display: none;
 
     position: absolute;
 
-    background: #ffcc80;
-}
+    width: 48px;
+    height: 48px;
 
-
-/* cabeça */
-
-#cabeca {
-    width: 45px;
-
-    height: 45px;
+    border: 5px solid white;
 
     border-radius: 50%;
 
-    top: 55px;
-
-    right: 34px;
-
-    background: transparent;
-
-    border: 5px solid white;
+    left: 151px;
+    top: 60px;
 }
 
 
-/* corpo */
+/* CORPO */
 
-#corpo {
+.parte-corpo {
+    display: none;
+
+    position: absolute;
+
     width: 6px;
-
     height: 70px;
 
-    top: 100px;
-
-    right: 53px;
-
     background: white;
+
+    left: 172px;
+    top: 108px;
+
+    border-radius: 5px;
 }
 
 
-/* braços */
+/* BRAÇOS */
 
-#bracoEsquerdo,
-#bracoDireito {
-    width: 55px;
+.parte-braco {
+    display: none;
 
+    position: absolute;
+
+    width: 58px;
     height: 6px;
 
-    top: 115px;
-
-    right: 53px;
-
     background: white;
+
+    top: 120px;
+
+    border-radius: 5px;
 
     transform-origin: left center;
 }
 
 
-#bracoEsquerdo {
+/* Braço esquerdo */
+
+.parte-braco.esquerdo {
+    left: 173px;
+
     transform: rotate(145deg);
 }
 
 
-#bracoDireito {
+/* Braço direito */
+
+.parte-braco.direito {
+    left: 175px;
+
     transform: rotate(35deg);
 }
 
 
-/* pernas */
+/* =========================
+   PERNAS
+========================= */
 
-#pernaEsquerda,
-#pernaDireita {
-    width: 55px;
+.parte-perna {
+    display: none;
 
+    position: absolute;
+
+    width: 60px;
     height: 6px;
 
-    top: 168px;
-
-    right: 53px;
-
     background: white;
+
+    top: 173px;
+
+    border-radius: 5px;
 
     transform-origin: left center;
 }
 
 
-#pernaEsquerda {
+/* Perna esquerda */
+
+.parte-perna.esquerda {
+    left: 173px;
+
     transform: rotate(125deg);
 }
 
 
-#pernaDireita {
+/* Perna direita */
+
+.parte-perna.direita {
+    left: 175px;
+
     transform: rotate(55deg);
 }
 
@@ -434,11 +429,10 @@ button:hover {
 
     padding: 15px;
 
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 
     font-size: 17px;
 }
-
 
 #dica {
     margin-left: 5px;
@@ -456,7 +450,7 @@ button:hover {
 
     letter-spacing: 12px;
 
-    margin: 25px 0;
+    margin: 20px 0;
 
     word-break: break-word;
 }
@@ -478,6 +472,65 @@ button:hover {
 
 
 /* =========================
+   LETRAS USADAS
+========================= */
+
+.letras-usadas {
+    background: rgba(0, 0, 0, 0.18);
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    margin: 15px auto 20px;
+
+    max-width: 650px;
+}
+
+.letras-usadas h3 {
+    margin-bottom: 12px;
+
+    font-size: 17px;
+}
+
+.usadas-linha {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+
+    font-size: 16px;
+}
+
+.titulo-certas {
+    font-weight: bold;
+
+    margin-right: 5px;
+}
+
+.titulo-erradas {
+    font-weight: bold;
+
+    margin-right: 5px;
+}
+
+#letrasCertas {
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+#letrasErradas {
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+/* =========================
    TECLADO
 ========================= */
 
@@ -493,7 +546,6 @@ button:hover {
     margin: auto;
 }
 
-
 .tecla {
     padding: 12px 5px;
 
@@ -506,20 +558,18 @@ button:hover {
     font-weight: bold;
 
     cursor: pointer;
-
-    transition: 0.2s;
 }
-
 
 .tecla:hover {
     background: #5865f2;
 }
 
-
 .tecla:disabled {
     opacity: 0.35;
 
     cursor: not-allowed;
+
+    transform: none;
 }
 
 
@@ -534,13 +584,8 @@ button:hover {
 }
 
 
-.novo-jogo:hover {
-    background: #16a34a;
-}
-
-
 /* =========================
-   RESPONSIVO
+   CELULAR
 ========================= */
 
 @media (max-width: 600px) {
@@ -549,17 +594,14 @@ button:hover {
         padding: 10px;
     }
 
-
     header h1 {
         font-size: 30px;
     }
-
 
     .card,
     .game {
         padding: 20px 15px;
     }
-
 
     .palavra {
         font-size: 25px;
@@ -567,13 +609,11 @@ button:hover {
         letter-spacing: 7px;
     }
 
-
     .teclado {
         grid-template-columns: repeat(7, 1fr);
 
         gap: 5px;
     }
-
 
     .tecla {
         padding: 10px 3px;
@@ -581,13 +621,14 @@ button:hover {
         font-size: 13px;
     }
 
-
     .botoes {
         flex-direction: column;
     }
 
+    .usadas-linha {
+        flex-direction: column;
 
-    .forca {
-        transform: scale(0.85);
+        gap: 10px;
     }
+
 }

@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,166 +13,184 @@
 
 <body>
 
-    <main class="container">
+<main class="container">
 
-        <header>
-            <h1>🎯 Jogo da Forca</h1>
-            <p>Escolha um modo e tente descobrir a palavra!</p>
-        </header>
+    <header>
+        <h1>🎯 Jogo da Forca</h1>
+        <p>Escolha um modo e tente descobrir a palavra!</p>
+    </header>
 
 
-        <!-- MENU PRINCIPAL -->
-        <section id="menu" class="card">
+    <!-- MENU -->
+    <section id="menu" class="card">
 
-            <h2>Escolha o modo</h2>
+        <h2>Escolha o modo</h2>
 
-            <button class="menu-button" onclick="abrirModoAmigo()">
-                👥 Jogar com um amigo
+        <button class="menu-button" onclick="abrirModoAmigo()">
+            👥 Jogar com um amigo
+        </button>
+
+        <button class="menu-button" onclick="iniciarModoAleatorio()">
+            🎲 Palavra aleatória
+        </button>
+
+    </section>
+
+
+    <!-- MODO AMIGO -->
+    <section id="configAmigo" class="card hidden">
+
+        <h2>👥 Criar desafio</h2>
+
+        <p>
+            Digite uma palavra e uma dica para seu amigo.
+        </p>
+
+        <label for="palavraAmigo">Palavra:</label>
+
+        <input
+            type="text"
+            id="palavraAmigo"
+            placeholder="Digite a palavra"
+            maxlength="30"
+            autocomplete="off"
+        >
+
+        <label for="dicaAmigo">Dica:</label>
+
+        <input
+            type="text"
+            id="dicaAmigo"
+            placeholder="Digite uma dica"
+            maxlength="100"
+            autocomplete="off"
+        >
+
+        <div class="botoes">
+
+            <button onclick="criarDesafio()">
+                🎮 Começar
             </button>
 
-            <button class="menu-button" onclick="iniciarModoAleatorio()">
-                🎲 Palavra aleatória
+            <button class="secondary" onclick="voltarMenu()">
+                ← Voltar
             </button>
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- CONFIGURAÇÃO DO MODO AMIGO -->
-        <section id="configAmigo" class="card hidden">
+    <!-- JOGO -->
+    <section id="jogo" class="game hidden">
 
-            <h2>👥 Criar desafio</h2>
+        <div class="game-header">
 
-            <p>
-                Digite uma palavra e uma dica para seu amigo.
-            </p>
+            <button class="small-button" onclick="voltarMenu()">
+                ← Menu
+            </button>
 
-            <label for="palavraAmigo">
-                Palavra:
-            </label>
+            <div class="erros">
+                Erros:
+                <span id="erros">0</span>/6
+            </div>
 
-            <input
-                type="text"
-                id="palavraAmigo"
-                placeholder="Digite a palavra"
-                maxlength="30"
-                autocomplete="off"
-            >
+        </div>
 
 
-            <label for="dicaAmigo">
-                Dica:
-            </label>
+        <!-- FORCA -->
+        <div class="forca-container">
 
-            <input
-                type="text"
-                id="dicaAmigo"
-                placeholder="Digite uma dica"
-                maxlength="100"
-                autocomplete="off"
-            >
+            <div class="forca">
 
+                <div class="poste-horizontal"></div>
 
-            <div class="botoes">
+                <div class="poste-vertical"></div>
 
-                <button onclick="criarDesafio()">
-                    🎮 Começar
-                </button>
+                <div class="base"></div>
 
-                <button class="secondary" onclick="voltarMenu()">
-                    ← Voltar
-                </button>
+                <div class="corda"></div>
+
+                <!-- BONECO -->
+                <div id="cabeca" class="parte-cabeca"></div>
+
+                <div id="corpo" class="parte-corpo"></div>
+
+                <div id="bracoEsquerdo" class="parte-braco esquerdo"></div>
+
+                <div id="bracoDireito" class="parte-braco direito"></div>
+
+                <div id="pernaEsquerda" class="parte-perna esquerda"></div>
+
+                <div id="pernaDireita" class="parte-perna direita"></div>
 
             </div>
 
-        </section>
+        </div>
 
 
-        <!-- JOGO -->
-        <section id="jogo" class="game hidden">
+        <!-- DICA -->
+        <div class="dica-box">
 
-            <div class="game-header">
+            <strong>💡 Dica:</strong>
 
-                <button class="small-button" onclick="voltarMenu()">
-                    ← Menu
-                </button>
+            <span id="dica">-</span>
 
-                <div class="erros">
-                    Erros:
-                    <span id="erros">0</span>/6
+        </div>
+
+
+        <!-- PALAVRA -->
+        <div id="palavra" class="palavra">
+            _ _ _ _ _
+        </div>
+
+
+        <!-- MENSAGEM -->
+        <div id="mensagem" class="mensagem"></div>
+
+
+        <!-- LETRAS USADAS -->
+        <div class="letras-usadas">
+
+            <h3>🔤 Letras usadas</h3>
+
+            <div class="usadas-linha">
+
+                <div>
+                    <span class="titulo-certas">✓ Certas:</span>
+                    <span id="letrasCertas">Nenhuma</span>
+                </div>
+
+                <div>
+                    <span class="titulo-erradas">✕ Erradas:</span>
+                    <span id="letrasErradas">Nenhuma</span>
                 </div>
 
             </div>
 
-
-            <!-- FORCA -->
-            <div class="forca-container">
-
-                <div class="forca">
-
-                    <div class="poste-horizontal"></div>
-
-                    <div class="poste-vertical"></div>
-
-                    <div class="base"></div>
-
-                    <div id="cabeca" class="boneco"></div>
-
-                    <div id="corpo" class="boneco"></div>
-
-                    <div id="bracoEsquerdo" class="boneco"></div>
-
-                    <div id="bracoDireito" class="boneco"></div>
-
-                    <div id="pernaEsquerda" class="boneco"></div>
-
-                    <div id="pernaDireita" class="boneco"></div>
-
-                </div>
-
-            </div>
+        </div>
 
 
-            <!-- DICA -->
-            <div class="dica-box">
-
-                <strong>💡 Dica:</strong>
-
-                <span id="dica">
-                    -
-                </span>
-
-            </div>
+        <!-- TECLADO -->
+        <div id="teclado" class="teclado"></div>
 
 
-            <!-- PALAVRA -->
-            <div id="palavra" class="palavra">
-                _ _ _ _ _
-            </div>
+        <!-- NOVO JOGO -->
+        <button
+            id="novoJogo"
+            class="novo-jogo hidden"
+            onclick="reiniciarJogo()"
+        >
+            🔄 Jogar novamente
+        </button>
+
+    </section>
+
+</main>
 
 
-            <!-- MENSAGEM -->
-            <div id="mensagem" class="mensagem"></div>
-
-
-            <!-- TECLADO -->
-            <div id="teclado" class="teclado"></div>
-
-
-            <!-- BOTÃO NOVO JOGO -->
-            <button
-                id="novoJogo"
-                class="novo-jogo hidden"
-                onclick="reiniciarJogo()"
-            >
-                🔄 Jogar novamente
-            </button>
-
-        </section>
-
-    </main>
-
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
+
